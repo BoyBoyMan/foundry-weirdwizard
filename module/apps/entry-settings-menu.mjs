@@ -118,11 +118,13 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
       entryKey = defaultListEntryKey(this.list, listKey),
       entryName = defaultListEntryName(this.list, listKey),
     entry = { name: entryName };
+    const showChanges = this.options.listKey == 'afflictions';
 
     const context = {
       entry: entry,
       key: entryKey,
       showKey: true,
+      showChanges,
       grantedBy: await fromUuid(entry.grantedBy) ?
         await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${entry.grantedBy}]`, { secrets: this.actor.isOwner }) : null
     };
@@ -171,11 +173,13 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
   static async #editEntry(event, button) {
     const newList = {... this.list};
     const entryKey = button.dataset.entryKey;
+    const showChanges = this.options.listKey == 'afflictions';
     
     const context = {
       entry: await newList[entryKey],
       key: entryKey,
-      showKey: true
+      showKey: true,
+      showChanges
     };
 
     // Show a dialog 
