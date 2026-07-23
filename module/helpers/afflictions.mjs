@@ -21,7 +21,7 @@ export class WWAfflictions {
 
   static async clearAfflictions(actor) {
     if (!actor) return;
-    
+
     const afflictions = actor
       .getEmbeddedCollection('ActiveEffect')
       .filter(e => e.statuses.size > 0)
@@ -31,219 +31,42 @@ export class WWAfflictions {
   }
 
   /**
-   * Builds the Afflictions Active Effects for the token quick menu
+   * Builds the Afflictions Active Effects for the token quick menu from the world settings
    * @returns list of active effect data
   */
   static buildAll() {
-    const buildAffliction = affliction => {
-      const {changes = [], ...data} = affliction;
-      
-      return {
-        ... data,
-        name: _loc(CONFIG.WW.AFFLICTIONS[data.id]),
-        tint: '#FF0900',
-        description: data.id.includes('impaired') ? _loc('WW.Affliction.ImpairedDesc') : _loc(CONFIG.WW.AFFLICTIONS[data.id] + 'Desc'),
-        duration: { expiry: 'luckEnds' },
-        system: {
-          durationPreset: 'luckEnds',
-          changes: changes
-        }
-      }
-    }
-
-    return this.afflictionsData().map(affliction => buildAffliction(affliction));
+    return Object.entries(this.afflictionsData()).map(([id, affliction]) =>
+      this._buildAffliction(id, affliction)
+    );
   }
 
   /**
    * A getter for data used by afflictions.
    */
   static afflictionsData() {
-    const baneAllAttributes = value => {
-      return [
-        addChange('banes.str', value),
-        addChange('banes.agi', value),
-        addChange('banes.int', value),
-        addChange('banes.wil', value)
-      ];
-    }
+    return game.settings.get('weirdwizard', 'availableAfflictions');
+  }
 
-    const againstAll = value => {
-      return [
-        addChange('boonsAgainst.def', value),
-        addChange('boonsAgainst.str', value),
-        addChange('boonsAgainst.agi', value),
-        addChange('boonsAgainst.int', value),
-        addChange('boonsAgainst.wil', value)
-      ];
-    }
+  /** Builds a single affliction's ActiveEffect data. */
+  static _buildAffliction(id, affliction) {
+    const { name, desc, img, changes = [] } = affliction;
 
-    return [
-      // Blinded
-      {
-        id: 'blinded',
-        img: 'icons/svg/blind.svg',
-        changes: [
-          booleanChange('speed.halved')
-        ]
-      },
-
-      // Confused
-      {
-        id: 'confused',
-        img: 'icons/svg/stoned.svg',
-        changes: [
-          addChange('banes.int'),
-          addChange('banes.wil')
-        ]
-      },
-
-      // Controlled
-      { id: 'controlled', img: 'systems/weirdwizard/assets/icons/puppet.svg' },
-
-      // Cursed
-      {
-        id: 'cursed',
-        img: 'systems/weirdwizard/assets/icons/bleeding-eye.svg',
-        changes: [addChange('banes.luck')]
-      },
-
-      // Deafened
-      { id: 'deafened', img: 'icons/svg/deaf.svg' },
-
-      // Frightened
-      {
-        id: 'frightened',
-        img: 'icons/svg/terror.svg',
-        changes: [
-          ...baneAllAttributes(1),
-          ...againstAll(1)
-        ]
-      },
-
-      // Held
-      {
-        id: 'held',
-        img: 'systems/weirdwizard/assets/icons/manacles.svg',
-        changes: [
-          downgradeChange('speed.downgrade'),
-          booleanChange('autoSuccessAgainst.agi'),
-        ]
-      },
-
-      // Strength Impaired
-      {
-        id: 'impairedStr',
-        img: 'systems/weirdwizard/assets/icons/biceps-impaired.svg',
-        changes: [
-          addChange('banes.str'),
-          addChange('boonsAgainst.str')
-        ]
-      },
-
-      // Agility Impaired
-      {
-        id: 'impairedAgi',
-        img: 'systems/weirdwizard/assets/icons/agility-impaired.svg',
-        changes: [
-          addChange('banes.agi'),
-          addChange('boonsAgainst.agi')
-        ]
-      },
-
-      // Intellect Impaired
-      {
-        id: 'impairedInt',
-        img: 'systems/weirdwizard/assets/icons/open-book-impaired.svg',
-        changes: [
-          addChange('banes.int'),
-          addChange('boonsAgainst.int')
-        ]
-      },
-
-      // Will Impaired
-      {
-        id: 'impairedWil',
-        img: 'systems/weirdwizard/assets/icons/burning-star-impaired.svg',
-        changes: [
-          addChange('banes.wil'),
-          addChange('boonsAgainst.wil')
-        ]
-      },
-
-      // On Fire
-      {
-        id: 'onFire',
-        img: 'systems/weirdwizard/assets/icons/flaming-claw.svg'
-      },
-
-      // Poisoned
-      {
-        id: 'poisoned',
-        img: 'systems/weirdwizard/assets/icons/poison.svg',
-        changes: [
-          ...baneAllAttributes(1),
-          ...againstAll(1)
-        ]
-      },
-
-      // Prone
-      { id: 'prone', img: 'systems/weirdwizard/assets/icons/fallen.svg' },
-
-      // Slowed
-      {
-        id: 'slowed',
-        img: 'systems/weirdwizard/assets/icons/snail.svg',
-        changes: [ downgradeChange('speed.downgrade', 2) ]
-      },
-
-      // Stunned
-      {
-        id: 'stunned',
-        img: 'icons/svg/daze.svg',
-        changes: [
-          downgradeChange('speed.downgrade'),
-          ...baneAllAttributes(2),
-          ...againstAll(2)
-        ]
-      },
-
-      // Unconscious
-      {
-        id: 'unconscious',
-        img: 'icons/svg/unconscious.svg',
-        changes: [
-          downgradeChange('speed.downgrade'),
-          booleanChange('autoFail.str'),
-          booleanChange('autoFail.agi'),
-          booleanChange('autoFail.int'),
-          booleanChange('autoFail.wil'),
-          ...againstAll(3)
-        ]
-      },
-
-      // Asleep
-      { id: 'asleep', img: 'icons/svg/sleep.svg' },
-
-      // Vulnerable
-      {
-        id: 'vulnerable',
-        img: 'systems/weirdwizard/assets/icons/broken-shield.svg',
-        changes: [ ...againstAll(1) ]
-      },
-
-      // Weakened
-      {
-        id: 'weakened',
-        img: 'systems/weirdwizard/assets/icons/back-pain.svg',
-        changes: [
-          addChange('banes.str'),
-          addChange('banes.agi'),
-          addChange('boonsAgainst.str'),
-          addChange('boonsAgainst.agi'),
-          booleanChange('speed.halved')
-        ]
+    return {
+      id,
+      name,
+      img,
+      description: desc,
+      tint: '#FF0900',
+      duration: { expiry: 'luckEnds' },
+      system: {
+        durationPreset: 'luckEnds',
+        changes: changes.map(c => ({
+          ...c,
+          key: keyFromPreset(c.preset),
+          phase: 'initial' // use initial so changes are considered during prepareDerivedData
+        }))
       }
-    ]
+    };
   }
 }
 

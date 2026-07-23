@@ -20,6 +20,41 @@
 
     <textarea name="desc">{{entry.desc}}</textarea>
   </div>
+
+  {{!-- Changes (afflictions only) --}}
+  {{#if showChanges}}
+  <div class="stat changes-wrapper">
+    <ol class="item-list changes-list">
+  
+      {{!-- Header Row --}}
+      <li class="item items-header flexrow">
+        <div class="item-name">{{localize "WW.Effect.Changes"}}</div>
+        <div class="item-controls effect-controls flexrow">
+          <a class="effect-control" data-action="changeCreate" data-tooltip="WW.Effect.Create">
+            <i class="fa-solid fa-plus"></i> {{localize "WW.Item.Create.Label"}}
+          </a>
+        </div>
+      </li>
+  
+      {{!-- Change Rows --}}
+      {{#each entry.changes as |change i|}}
+      <li class="item change flexrow" data-change-index="{{i}}">
+        <div class="item-name">{{localize (lookup change "presetLabel")}}</div>
+  
+        <div class="item-controls effect-controls flexrow">
+          <a class="effect-control" data-action="changeEdit" data-change-index="{{i}}" data-tooltip="WW.Effect.Edit">
+            <i class="fa-solid fa-edit"></i>
+          </a>
+          <a class="effect-control" data-action="changeRemove" data-change-index="{{i}}" data-tooltip="WW.Effect.Remove">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </div>
+      </li>
+      {{/each}}
+
+    </ol>
+  </div>
+  {{/if}}
   
   {{!-- Granted By --}}
   {{#if entry.grantedBy}}

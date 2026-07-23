@@ -24,7 +24,8 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
       addEntry: this.#addEntry,
       addSet: this.#addSet,
       editEntry: this.#editEntry,
-      removeEntry: this.#removeEntry
+      removeEntry: this.#removeEntry,
+      //addChange: this.#addChange
     },
     form: {
       handler: this.#submitHandler,
@@ -117,12 +118,18 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
       listKey = this.listKey,
       entryKey = defaultListEntryKey(this.list, listKey),
       entryName = defaultListEntryName(this.list, listKey),
-    entry = { name: entryName };
+      entry = { name: entryName, changes: [] };
+
+    const showChanges = listKey === 'afflictions';
+
+    // Working copy of changes, mutated by the row handlers, read back on submit
+    let workingChanges = [...(entry.changes ?? [])];
 
     const context = {
-      entry: entry,
+      entry: { ...entry, changes: workingChanges.map(c => ({ ...c, presetLabel: flattenPresetLabel(c.preset) })) },
       key: entryKey,
       showKey: true,
+      showChanges,
       grantedBy: await fromUuid(entry.grantedBy) ?
         await foundry.applications.ux.TextEditor.implementation.enrichHTML(`@UUID[${entry.grantedBy}]`, { secrets: this.actor.isOwner }) : null
     };
@@ -171,11 +178,15 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
   static async #editEntry(event, button) {
     const newList = {... this.list};
     const entryKey = button.dataset.entryKey;
+
+    const showChanges = this.listKey === 'afflictions';
+    let workingChanges = [...(entry.changes ?? [])];
     
     const context = {
       entry: await newList[entryKey],
       key: entryKey,
-      showKey: true
+      showKey: true,
+      showChanges
     };
 
     // Show a dialog 
@@ -215,6 +226,10 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
 
     this.render(true);
   }
+
+  /* -------------------------------------------- */
+
+  
 
   /* -------------------------------------------- */
 
@@ -258,7 +273,7 @@ export class EntrySettingsMenu extends HandlebarsApplicationMixin(ApplicationV2)
       movementTraits: CONFIG.WW.DEFAULT_MOVEMENT_TRAITS,
       descriptors: CONFIG.WW.DEFAULT_DESCRIPTORS,
       weaponTraits: CONFIG.WW.DEFAULT_WEAPON_TRAITS,
-      afflictions: CONFIG.WW.DEFAULT_AFFLICTIONS
+      afflictions: CONFIG.WW.DEFAULT_AFFLICTIONS,
     }
 
     // Update list with the default values
