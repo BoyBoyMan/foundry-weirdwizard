@@ -1365,7 +1365,7 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Cursed',
     img: 'systems/weirdwizard/assets/icons/bleeding-eye.svg',
     changes: [
-      { preset: 'banes.luck', value: 1, type: 'add', priority: 120 }
+      { preset: 'banes.luck', value: 1, type: 'subtract', priority: 120 }
     ]
   },
   'deafened': {
@@ -1379,10 +1379,10 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Frightened',
     img: 'icons/svg/terror.svg',
     changes: [
-      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.str', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.int', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.wil', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.def', value: 1, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
@@ -1402,7 +1402,7 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Strength Impaired',
     img: 'systems/weirdwizard/assets/icons/biceps-impaired.svg',
     changes: [
-      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.str', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 }
     ]
   },
@@ -1410,7 +1410,7 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Agility Impaired',
     img: 'systems/weirdwizard/assets/icons/agility-impaired.svg',
     changes: [
-      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 }
     ]
   },
@@ -1418,7 +1418,7 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Intellect Impaired',
     img: 'systems/weirdwizard/assets/icons/open-book-impaired.svg',
     changes: [
-      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.int', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.int', value: 1, type: 'add', priority: 120 }
     ]
   },
@@ -1426,7 +1426,7 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Will Impaired',
     img: 'systems/weirdwizard/assets/icons/burning-star-impaired.svg',
     changes: [
-      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.wil', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.wil', value: 1, type: 'add', priority: 120 }
     ]
   },
@@ -1441,10 +1441,10 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Poisoned',
     img: 'systems/weirdwizard/assets/icons/poison.svg',
     changes: [
-      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.str', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.int', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.wil', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.def', value: 1, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
@@ -1471,10 +1471,10 @@ WW.DEFAULT_AFFLICTIONS = {
     img: 'icons/svg/daze.svg',
     changes: [
       { preset: 'speed.downgrade', value: 0, type: 'downgrade', priority: 150 },
-      { preset: 'banes.str', value: 2, type: 'add', priority: 120 },
-      { preset: 'banes.agi', value: 2, type: 'add', priority: 120 },
-      { preset: 'banes.int', value: 2, type: 'add', priority: 120 },
-      { preset: 'banes.wil', value: 2, type: 'add', priority: 120 },
+      { preset: 'banes.str', value: 2, type: 'subtract', priority: 120 },
+      { preset: 'banes.agi', value: 2, type: 'subtract', priority: 120 },
+      { preset: 'banes.int', value: 2, type: 'subtract', priority: 120 },
+      { preset: 'banes.wil', value: 2, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.def', value: 2, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.str', value: 2, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.agi', value: 2, type: 'add', priority: 120 },
@@ -1520,8 +1520,8 @@ WW.DEFAULT_AFFLICTIONS = {
     name: 'Weakened',
     img: 'systems/weirdwizard/assets/icons/back-pain.svg',
     changes: [
-      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
-      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.str', value: 1, type: 'subtract', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'subtract', priority: 120 },
       { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
       { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
       { preset: 'speed.downgrade', value: true, type: 'override', priority: 170 },
