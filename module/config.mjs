@@ -1345,3 +1345,186 @@ WW.DEFAULT_CONNECTIONS = {
     desc: 'The connection either grants a place for the character and allies to hole up for a time or provides the services of an armed guard for the duration of the next quest. The guard should have a Difficulty 1 at the novice tier, 2 at the expert tier, and 4 at the master tier.'
   }
 };
+
+WW.DEFAULT_AFFLICTIONS = {
+  'blinded': {
+    name: 'Blinded',
+    img: 'icons/svg/blind.svg',
+    changes: [
+      { preset: 'speed.halved', value: true, type: 'override', priority: 170 }
+    ]
+  },
+  'controlled': {
+    name: 'Controlled',
+    img: 'systems/weirdwizard/assets/icons/puppet.svg',
+    changes: [
+
+    ]
+  },
+  'cursed': {
+    name: 'Cursed',
+    img: 'systems/weirdwizard/assets/icons/bleeding-eye.svg',
+    changes: [
+      { preset: 'banes.luck', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'deafened': {
+    name: 'Deafened',
+    img: 'icons/svg/deaf.svg',
+    changes: [
+
+    ]
+  },
+  'frightened': {
+    name: 'Frightened',
+    img: 'icons/svg/terror.svg',
+    changes: [
+      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.def', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'held': {
+    name: 'Held',
+    img: 'systems/weirdwizard/assets/icons/manacles.svg',
+    changes: [
+      { preset: 'speed.downgrade', value: 0, type: 'downgrade', priority: 150 },
+      { preset: 'autoSuccessAgainst.agi', value: 1, type: 'override', priority: 170 }
+    ]
+  },
+  'impairedStr': {
+    name: 'Strength Impaired',
+    img: 'systems/weirdwizard/assets/icons/biceps-impaired.svg',
+    changes: [
+      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'impairedAgi': {
+    name: 'Agility Impaired',
+    img: 'systems/weirdwizard/assets/icons/agility-impaired.svg',
+    changes: [
+      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'impairedInt': {
+    name: 'Intellect Impaired',
+    img: 'systems/weirdwizard/assets/icons/open-book-impaired.svg',
+    changes: [
+      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'impairedWil': {
+    name: 'Will Impaired',
+    img: 'systems/weirdwizard/assets/icons/burning-star-impaired.svg',
+    changes: [
+      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'onFire': {
+    name: 'On Fire',
+    img: 'systems/weirdwizard/assets/icons/flaming-claw.svg',
+    changes: [
+
+    ]
+  },
+  'poisoned': {
+    name: 'Poisoned',
+    img: 'systems/weirdwizard/assets/icons/poison.svg',
+    changes: [
+      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.wil', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.def', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'prone': {
+    name: 'Prone',
+    img: 'systems/weirdwizard/assets/icons/fallen.svg',
+    changes: [
+
+    ]
+  },
+  'slowed': {
+    name: 'Slowed',
+    img: 'systems/weirdwizard/assets/icons/snail.svg',
+    changes: [
+      { preset: 'speed.downgrade', value: 2, type: 'downgrade', priority: 150 }
+    ]
+  },
+  'stunned': {
+    name: 'Stunned',
+    img: 'icons/svg/daze.svg',
+    changes: [
+      { preset: 'speed.downgrade', value: 0, type: 'downgrade', priority: 150 },
+      { preset: 'banes.str', value: 2, type: 'add', priority: 120 },
+      { preset: 'banes.agi', value: 2, type: 'add', priority: 120 },
+      { preset: 'banes.int', value: 2, type: 'add', priority: 120 },
+      { preset: 'banes.wil', value: 2, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.def', value: 2, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 2, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 2, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 2, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 2, type: 'add', priority: 120 }
+    ]
+  },
+  'unconscious': {
+    name: 'Unconscious',
+    img: 'icons/svg/unconscious.svg',
+    changes: [
+      { preset: 'speed.downgrade', value: 0, type: 'downgrade', priority: 150 },
+      { preset: 'autoFail.str', value: true, type: 'override', priority: 170 },
+      { preset: 'autoFail.agi', value: true, type: 'override', priority: 170 },
+      { preset: 'autoFail.int', value: true, type: 'override', priority: 170 },
+      { preset: 'autoFail.wil', value: true, type: 'override', priority: 170 },
+      { preset: 'boonsAgainst.def', value: 3, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 3, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 3, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 3, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 3, type: 'add', priority: 120 }
+    ]
+  },
+  'asleep': {
+    name: 'Asleep',
+    img: 'icons/svg/sleep.svg',
+    changes: [
+
+    ]
+  },
+  'vulnerable': {
+    name: 'Vulnerable',
+    img: 'systems/weirdwizard/assets/icons/broken-shield.svg',
+    changes: [
+      { preset: 'boonsAgainst.def', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.int', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.wil', value: 1, type: 'add', priority: 120 }
+    ]
+  },
+  'weakened': {
+    name: 'Weakened',
+    img: 'systems/weirdwizard/assets/icons/back-pain.svg',
+    changes: [
+      { preset: 'banes.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'banes.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.str', value: 1, type: 'add', priority: 120 },
+      { preset: 'boonsAgainst.agi', value: 1, type: 'add', priority: 120 },
+      { preset: 'speed.downgrade', value: true, type: 'override', priority: 170 },
+    ]
+  },
+};
